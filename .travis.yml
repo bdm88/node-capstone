@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: swNgwkTZPxyD2gnZ++bbaYgtfzW1UOfmRugaEH5Z3sCUvgd8OQMUlYjYUR+3yO/p7/8RFo/E2zFOLweJyCMqQWufl6d4MXffx8/ovZH0zF/NZa29Juc1pAaFMaTLCxkuh9QFHDLlWnHTJ7NYtCeUg5nD+eqvLe97Nz5cVybFGsf+Rcr5omQgdO4A/CLX6rdDM3BVFwmqfBqE4EcC4k+lKTsx7pldEvBkaFde/8FFaU7W60ROsPVPC8sSHtcBzSj4ck8sjNk37Z60LWDi8NiiBWWz+UwuPXUZ2Dli2+RtN4aAtcBBvGGFlOX7yARGxeaLA2ks2AAAkcfJdapp9YLbOUx2DCnGM5btCkE5FoZWbZXy5gudfAVP6qdZV3ESdALJSSt4fq+UZf4YjLTyc7sPaN7APreEaac7zBMeREhfhiSdmO5BMS+w53ofgieBRDLi74YyrhlMY9eNdfvXMIHLxPJ0yqsGOmLStQSDKnD5lDjXgWwFhwPgcVzhAJ5UUpHrHIUlQ8aSbQQ4H46DmMM26QimeBisLPM5iQr6IEyZbdkB4mTS1Ps8cau+dKrlkAougu1F1+LjN46jewCDnNXTCtYzRkE+j6JRNYH8V6b8biHQD9gwfAEYbfKRxhXSJtEs+eLXjGM64YSGcUAisP/0GxTtVlLchZp3wWjjPWYRMIs=
+  app: node-capstone
+  on:
+    repo: bdm88/node-capstone
