@@ -8,7 +8,20 @@
     <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
-    <p>Hello World</p>
+    <header role="banner">
+    </header>
+    <section role="region">
+        <h2 class="username">Username</h2>
+    </section>
+    <section role="region" class="recipeContainer">
+        <button type="button" class="newRecipeButton">Add New Recipe</button>
+        <section role="region" class="recipe">
+            <img class="recipeImage">
+            <button type="button" class="editRecipeButton">Edit Recipe</button>
+            <h3 class="recipeName">Recipe Name</h3>
+            <p class="recipeInfo">Recipe info</p>
+        </section>
+    </section>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="index.js"></script>
 </body>
