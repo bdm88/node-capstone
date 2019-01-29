@@ -6,9 +6,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.static('public'));
-app.listen(process.env.PORT || 8080);
 
-mongoose.connect('mongodb://localhost:27017/recipes', {useNewUrlParser: true});
+const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/recipes';
+const PORT = process.env.PORT || 8080;
+
+mongoose.connect(DATABASE_URL, app.listen(PORT));
 
 const Recipe = mongoose.model('Recipe', {
     name: String,
