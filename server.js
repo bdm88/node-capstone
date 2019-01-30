@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.static('public'));
 
-const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/recipes';
+const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost/recipes';
 const PORT = process.env.PORT || 8080;
 
 mongoose.connect(DATABASE_URL, app.listen(PORT));
