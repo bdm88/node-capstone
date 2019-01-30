@@ -17,9 +17,9 @@ const Recipe = mongoose.model('Recipe', {
     info: String
 })
 
-app.get('/recipes', (request, response) =>{
+app.get('/recipes', (req, res) =>{
     Recipe.find().then(data =>{
-        response.json(data)
+        res.json(data)
     })
 })
 

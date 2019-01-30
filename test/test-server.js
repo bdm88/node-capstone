@@ -21,7 +21,6 @@ describe('index page', function(){
 
 describe('recipes', function(){
     it('should list recipes on GET', function(){
-        this.timeout(500);
         return chai.request(app)
             .get('/recipes')
             .then(function(res){
