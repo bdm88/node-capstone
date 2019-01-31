@@ -4,7 +4,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
-const {app, runServer, closeServer} = require('../server');
+const app = require('../server');
 
 const expect = chai.expect;
 
@@ -23,7 +23,7 @@ describe('index page', function(){
 
 describe('recipes', function(){
     it('should list recipes on GET', function(){
-        this.timeout(10000);
+        this.timeout(5000);
         return chai.request(app)
             .get('/recipes')
             .then(function(res){
