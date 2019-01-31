@@ -4,11 +4,12 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 
-const app = require('../server.js');
+const {app, runServer, closeServer} = require('../server');
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
+
 
 describe('index page', function(){
     it('should exist', function(){
