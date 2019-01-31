@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.static('public'));
 
-const { PORT, DATABASE_URL } = require('./config');
+const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.connect(DATABASE_URL, app.listen(PORT));
 
