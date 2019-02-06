@@ -32,7 +32,7 @@ describe('recipes', function(){
                 expect(res.body.length).to.be.above(0);
                 res.body.forEach(function(item){
                     expect(item).to.be.a('object');
-                    expect(item).to.have.all.keys('_id', 'name', 'info');
+                    expect(item).to.have.all.keys('_id', 'name', 'info', 'ingredients', 'directions');
                 });
             });
     });
