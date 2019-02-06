@@ -1,27 +1,40 @@
 'use strict';
 
 function displayRecipes(){
-    $.getJSON('/recipes', recipes =>{
+    $.getJSON('http://localhost:8080/recipes', recipes =>{
         for(let i = 0; i < recipes.length; i++){
             const ingredients = recipes[i].ingredients;
             const directions = recipes[i].directions;
             $('.recipeContainer').append(
                 `
                 <section role="region" class="recipe" >
-                    <button type="button" class="editRecipeButton">Edit Recipe</button>
-                    <h3 class="recipeName">${recipes[i].name}</h3>
-                    <p class="recipeInfo">${recipes[i].info}</p>
-                    <ul class="ingredientsList">
-                        ${displayIngredients(ingredients)}
-                    </ul>
-                    <ol class="directionsList">
-                        ${displayDirections(directions)}
-                    </ol>
+                    <button class="accordion">
+                        <h3 class="recipeName">${recipes[i].name}</h3>
+                        <p class="recipeInfo">${recipes[i].info}</p>
+                    </button>
+                    <section role="region" class="panel">
+                        <button type="button" class="editRecipeButton">Edit Recipe</button>
+                        <h3>Ingredients</h3>
+                        <ul class="ingredientsList">
+                            ${displayIngredients(ingredients)}
+                        </ul>
+                        <h3>Directions</h3>
+                        <ol class="directionsList">
+                            ${displayDirections(directions)}
+                        </ol>
+                    </section>
                 </section>
                 `
             );
         }
     })
+}
+
+function accordion(){
+    $('.recipeContainer').on('click', '.accordion', function(){
+        $(this).toggleClass('clicked');
+        $(this).parent().find('.panel').toggleClass('active');
+    });
 }
 
 function displayIngredients(ingredients){
@@ -44,4 +57,5 @@ function displayDirections(directions){
 
 $(function(){
     displayRecipes();
+    accordion();
 })
