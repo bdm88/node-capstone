@@ -1,7 +1,7 @@
 'use strict';
 
 function displayRecipes(){
-    $.getJSON('http://localhost:8080/recipes', recipes =>{
+    $.getJSON('/recipes', recipes =>{
         for(let i = 0; i < recipes.length; i++){
             const ingredients = recipes[i].ingredients;
             const directions = recipes[i].directions;
