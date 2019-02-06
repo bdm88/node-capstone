@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+const uuid = require('uuid');
 
 const app = express();
 

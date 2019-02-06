@@ -13,8 +13,21 @@
     <section role="region">
         <h2 class="username">Username</h2>
     </section>
-    <section role="region" class="recipeContainer">
+    <section role="region" class="buttonContainer">
         <button type="button" class="newRecipeButton">Add New Recipe</button>
+        <section role="region" class="newRecipeFormContainer">
+            <form class="newRecipeForm">
+                <h3>Create new recipe.</h3>
+                <label for="name">Recipe name</label>
+                <input type="text" placeholder="Enter recipe name" name="name" class="newRecipeName" required>
+                <label for="info">Recipe info</label>
+                <input type="text" placeholder="Info about your recipe" name="info" class="newRecipeInfo" required>
+                <button type="submit" class="submitRecipe">Create</button>
+                <button type="submit" class="cancelRecipe">Cancel</button>
+            </form>
+        </section>
+    </section>
+    <section role="region" class="recipeContainer">
     </section>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="index.js"></script>
