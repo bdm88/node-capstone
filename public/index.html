@@ -20,10 +20,20 @@
                 <h3>Create new recipe.</h3>
                 <label for="name">Recipe name</label>
                 <input type="text" placeholder="Enter recipe name" name="name" class="newRecipeName" required>
+                
                 <label for="info">Recipe info</label>
                 <input type="text" placeholder="Info about your recipe" name="info" class="newRecipeInfo" required>
+                
+                <label for="ingredients">Ingredients</label>
+                <input type="text" name="ingredients" class="newRecipeIngredients" required>
+                <button type="button" class="addIngredient">Add Ingredient</button>
+                
+                <label for="directions">Directions</label>
+                <input type="text" name="directions" class="newRecipeDirections" required>
+                <button type="button" class="addDirection">Add Step</button>
+
                 <button type="submit" class="submitRecipe">Create</button>
-                <button type="submit" class="cancelRecipe">Cancel</button>
+                <button type="button" class="cancelRecipe">Cancel</button>
             </form>
         </section>
     </section>
