@@ -1,11 +1,13 @@
 'use strict';
 
 function displayRecipes(){
-    $.getJSON('/recipes', recipes =>{
+    $.getJSON('http://localhost:8080/recipes', recipes =>{
+        console.log(recipes.length);
+        let allRecipes = '';
         for(let i = 0; i < recipes.length; i++){
             const ingredients = recipes[i].ingredients;
             const directions = recipes[i].directions;
-            $('.recipeContainer').append(
+            allRecipes +=
                 `
                 <section role="region" class="recipe" >
                     <button class="accordion">
@@ -14,6 +16,8 @@ function displayRecipes(){
                     </button>
                     <section role="region" class="panel">
                         <button type="button" class="editRecipeButton">Edit Recipe</button>
+                        <button type="button" class="deleteRecipeButton">Delete Recipe</button>
+                        <p class="recipeId">${recipes[i]._id}</p>
                         <h3>Ingredients</h3>
                         <ul class="ingredientsList">
                             ${displayIngredients(ingredients)}
@@ -25,8 +29,9 @@ function displayRecipes(){
                     </section>
                 </section>
                 `
-            );
+            ;
         }
+        $('.recipeContainer').html(allRecipes);
     })
 }
 
@@ -56,6 +61,12 @@ function displayDirections(directions){
 function createRecipeButton(){
     $('.newRecipeButton').on('click', function(){
         $('.newRecipeFormContainer').css('display', 'block');
+    })
+}
+
+function cancelRecipeButton(){
+    $('.cancelRecipe').on('click', function(){
+        $('.newRecipeFormContainer').css('display', 'none');
     })
 }
 
@@ -96,15 +107,27 @@ function watchNewForm(){
 
 function createRecipe(recipe){
     $.ajax({
-        beforeSend: function(){
-            $('.recipe').remove();
-        },
         method: 'POST',
-        url: '/recipes',
+        url: 'http://localhost:8080/recipes',
         data: JSON.stringify(recipe),
-        success: location.reload(true),
+        success: displayRecipes,
         dataType: 'json',
         contentType: 'application/json'
+    });
+}
+
+function deleteRecipe(){
+    $('.recipeContainer').on('click', '.deleteRecipeButton', function(){
+        console.log('delete recipe clicked');
+        let recipeId = $(this).parent().find('.recipeId').text();
+        console.log(recipeId);
+        $.ajax({
+            method: 'DELETE',
+            url: `http://localhost:8080/recipes/${recipeId}`,
+            success: displayRecipes,
+            dataType: 'json',
+            contentType: 'application/json'
+        });
     });
 }
 
@@ -112,7 +135,9 @@ $(function(){
     displayRecipes();
     accordion();
     createRecipeButton();
+    cancelRecipeButton();
     watchNewForm();
     addIngredient();
     addDirection();
+    deleteRecipe();
 })

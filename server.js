@@ -47,7 +47,19 @@ app.post('/recipes', jsonParser, (req, res) =>{
     )
     .catch(err =>{
         console.log(err);
-        res.status(500).json({message: 'Internal server error'});
+        res.status(500).json({error: 'Internal server error'});
+    });
+});
+
+app.delete('/recipes/:id', (req, res) =>{
+    console.log(req.params.id);
+    Recipe.findByIdAndRemove(req.params.id)
+    .then(() =>{
+        res.status(204).json({message: 'success'});
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({error: 'Internal server error'});
     });
 });
 

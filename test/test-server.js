@@ -59,8 +59,8 @@ describe('Recipes API resource', function(){
         });
     });
 
-    describe('recipes', function(){
-        it('should list recipes on GET', function(){
+    describe('GET recipes', function(){
+        it('should list all recipes', function(){
             return chai.request(app)
                 .get('/recipes')
                 .then(function(res){
@@ -74,8 +74,10 @@ describe('Recipes API resource', function(){
                     });
                 });
         });
+    });
 
-        it('should add item on POST', function(){
+    describe('POST recipes', function(){
+        it('should add a new recipe on POST', function(){
             const newItem = generateRecipeData();
 
             return chai.request(app)
@@ -88,6 +90,24 @@ describe('Recipes API resource', function(){
                     expect(res.body).to.have.all.keys('__v', '_id', 'name', 'info', 'ingredients', 'directions');
                     expect(res.body._id).to.not.equal(null);
                     expect(res.body).to.deep.equal(Object.assign(newItem, {_id: res.body._id}));
+                });
+        });
+    });
+
+    describe('DELETE recipes', function(){
+        it('should delete a recipe by id', function(){
+            let recipe;
+            return Recipe.findOne()
+                .then(function(_recipe){
+                    recipe = _recipe;
+                    return chai.request(app).delete(`/recipes/${recipe.id}`);
+                })
+                .then(function(res){
+                    expect(res).to.have.status(204);
+                    return Recipe.findById(recipe.id);
+                })
+                .then(function(_recipe){
+                    expect(_recipe).to.be.null;
                 });
         });
     });

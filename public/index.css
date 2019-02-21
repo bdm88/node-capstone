@@ -12,6 +12,33 @@
 
 .newRecipeFormContainer {
     display: none;
+    border: 1px black solid;
+    padding: 5px;
+}
+
+.newRecipeFormTitle {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.recipeNameLabel {
+    display: block;
+}
+
+.recipeInfoLabel {
+    display: block;
+}
+
+.newRecipeInfo {
+    width: 50%;
+}
+
+.recipeIngredientsLabel {
+    display: block;
+}
+
+.recipeDirectionsLabel {
+    display: block;
 }
 
 .recipe {
@@ -21,6 +48,14 @@
 
 .editRecipeButton {
     float: right;
+}
+
+.deleteRecipeButton {
+    float: right;
+}
+
+.recipeId {
+    display: none;
 }
 
 .recipeName {
