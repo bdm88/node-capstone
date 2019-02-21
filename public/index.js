@@ -1,7 +1,7 @@
 'use strict';
 
 function displayRecipes(){
-    $.getJSON('http://localhost:8080/recipes', recipes =>{
+    $.getJSON('/recipes', recipes =>{
         console.log(recipes.length);
         let allRecipes = '';
         for(let i = 0; i < recipes.length; i++){
@@ -108,7 +108,7 @@ function watchNewForm(){
 function createRecipe(recipe){
     $.ajax({
         method: 'POST',
-        url: 'http://localhost:8080/recipes',
+        url: '/recipes',
         data: JSON.stringify(recipe),
         success: displayRecipes,
         dataType: 'json',
@@ -123,7 +123,7 @@ function deleteRecipe(){
         console.log(recipeId);
         $.ajax({
             method: 'DELETE',
-            url: `http://localhost:8080/recipes/${recipeId}`,
+            url: `/recipes/${recipeId}`,
             success: displayRecipes,
             dataType: 'json',
             contentType: 'application/json'
