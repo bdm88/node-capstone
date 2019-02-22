@@ -15,6 +15,27 @@ function displayRecipes(){
                     </button>
                     <section role="region" class="panel">
                         <button type="button" class="editRecipeButton">Edit Recipe</button>
+                        <section role="region" class="editRecipePopup">
+                            <form class="editRecipeForm">
+                                <h3 class="editRecipeFormTitle">Create new recipe</h3>
+                                <label for="name" class="recipeNameLabel">Recipe name</label>
+                                <input type="text" value="${recipes[i].name}" name="name" class="editRecipeName" required>
+                        
+                                <label for="info" class="recipeInfoLabel">Recipe info</label>
+                                <input type="text" value="${recipes[i].info}" name="info" class="editRecipeInfo" required>
+                        
+                                <label for="ingredients" class="recipeIngredientsLabel">Ingredients</label>
+                                <input type="text" value="${displayIngredients(ingredients)}" name="ingredients" class="editRecipeIngredients" required>
+                                <button type="button" class="addIngredient">Add Ingredient</button>
+                        
+                                <label for="directions" class="recipeDirectionsLabel">Directions</label>
+                                <input type="text" value="${displayDirections(directions)}" name="directions" class="newRecipeDirections" required>
+                                <button type="button" class="addDirection">Add Step</button>
+        
+                                <button type="submit" class="submitEditRecipe">Save</button>
+                                <button type="button" class="cancelEditRecipe">Cancel</button>
+                            </form>
+                        </section>
                         <button type="button" class="deleteRecipeButton">Delete Recipe</button>
                         <p class="recipeId">${recipes[i]._id}</p>
                         <h3>Ingredients</h3>
@@ -128,6 +149,12 @@ function deleteRecipe(){
     });
 }
 
+function toggleEditPopup(){
+    $('.recipeContainer').on('click', '.editRecipeButton', function(){
+        $(this).parent().find('.editRecipePopup').toggleClass('show');
+    })
+}
+
 $(function(){
     displayRecipes();
     accordion();
@@ -137,4 +164,5 @@ $(function(){
     addIngredient();
     addDirection();
     deleteRecipe();
+    toggleEditPopup();
 })

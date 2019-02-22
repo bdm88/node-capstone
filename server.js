@@ -51,18 +51,7 @@ app.post('/recipes', jsonParser, (req, res) =>{
     });
 });
 
-app.delete('/recipes/:id', (req, res) =>{
-    Recipe.findByIdAndRemove(req.params.id)
-    .then(() =>{
-        res.status(204).json({message: 'success'});
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({error: 'Internal server error'});
-    });
-});
-
-app.put('/recipes/:id', (req, res) =>{
+app.put('/recipes/:id', jsonParser, (req, res) =>{
     if(!(req.params.id && req.body._id && req.params.id === req.body._id)){
         res.status(400).json({
             error: 'Request path id and body id values must match.'
@@ -72,12 +61,25 @@ app.put('/recipes/:id', (req, res) =>{
     const updateableFields = ['name', 'info', 'ingredients', 'directions'];
     updateableFields.forEach(field =>{
         if(field in req.body){
-            update[field] = req.body[field];
+            updated[field] = req.body[field];
         }
     });
-    Recipe.findOneAndUpdate(req.params.id, {$set: updated}, {new: true})
-        .then(updatedRecipe => res.status(204).end())
+    Recipe.findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
+        .then(function(updatedRecipe){
+            res.status(204).end()
+        })
         .catch(err => res.status(500).json({error: 'Internal server error'}));
+});
+
+app.delete('/recipes/:id', (req, res) =>{
+    Recipe.findByIdAndRemove(req.params.id)
+    .then(() =>{
+        res.status(204).json({message: 'success'});
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({error: 'Internal server error'});
+    });
 });
 
 let server;

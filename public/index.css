@@ -50,6 +50,16 @@
     float: right;
 }
 
+.editRecipePopup {
+    position: relative;
+    display: inline-block;
+    visibility: hidden;
+}
+
+.editRecipePopup.show {
+    visibility: visible;
+}
+
 .deleteRecipeButton {
     float: right;
 }

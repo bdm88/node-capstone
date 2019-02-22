@@ -94,13 +94,42 @@ describe('Recipes API resource', function(){
         });
     });
 
+    describe('PUT recipes', function(){
+        it('should update recipe fields', function(){
+            const updateRecipe = {
+                name: 'bizz bang foo',
+                info: 'bizz bang foo bar',
+                ingredients: ["bizz", "bang"],
+                directions: ["foo", "bar"]
+            };
+            return Recipe.findOne()
+                .then(function(recipe){
+                    updateRecipe._id = recipe._id;
+                    return chai.request(app)
+                        .put(`/recipes/${recipe._id}`)
+                        .send(updateRecipe);
+                })
+                .then(function(res){
+                    expect(res).to.have.status(204);
+                    return Recipe.findById(updateRecipe._id);
+                })
+                .then(function(recipe){
+                    expect(recipe.name).to.equal(updateRecipe.name);
+                    expect(recipe.info).to.equal(updateRecipe.info);
+                    expect(recipe.ingredients).to.deep.equal(updateRecipe.ingredients);
+                    expect(recipe.directions).to.deep.equal(updateRecipe.directions);
+                });
+        });
+    });
+
     describe('DELETE recipes', function(){
         it('should delete a recipe by id', function(){
             let recipe;
             return Recipe.findOne()
                 .then(function(_recipe){
                     recipe = _recipe;
-                    return chai.request(app).delete(`/recipes/${recipe.id}`);
+                    return chai.request(app)
+                        .delete(`/recipes/${recipe.id}`);
                 })
                 .then(function(res){
                     expect(res).to.have.status(204);
